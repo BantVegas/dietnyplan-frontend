@@ -1,6 +1,6 @@
 import { useState } from "react";
 
-const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080";
+const BACKEND_URL = import.meta.env.VITE_BACKEND_URL || "http://localhost:8080/api";
 
 export default function WomanVysledok() {
   const [email, setEmail] = useState("");
@@ -25,40 +25,24 @@ export default function WomanVysledok() {
     setError("");
     setLoading(true);
 
-    // Jednoduchá validácia emailu
-    if (!email || !/\S+@\S+\.\S+/.test(email)) {
-      setError("Zadajte platný email.");
-      setLoading(false);
-      return;
-    }
-
     try {
       const res = await fetch(`${BACKEND_URL}/create-checkout-session`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ email }),
       });
-
-      if (!res.ok) {
-        throw new Error("Chyba servera");
-      }
-
+      if (!res.ok) throw new Error("Chyba servera");
       const data = await res.json();
-
-      if (data.url) {
-        window.location.href = data.url; // presmerovanie na Stripe Checkout
-      } else {
-        throw new Error("Nesprávna odpoveď zo servera");
-      }
-    } catch (err) {
-      setError("Nastala chyba pri odosielaní. Skús to znova.");
+      window.location.href = data.url;
+    } catch {
+      setError("Nastala chyba pri odosielaní. Skús znova.");
     } finally {
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-x-hidden bg-teal-50 px-4 sm:px-0">
+    <div className="min-h-screen w-full flex flex-col items-center justify-center relative overflow-x-hidden bg-teal-50">
       {/* Ukážka diétného plánu */}
       <div className="mt-16 mb-6 w-full max-w-3xl mx-auto bg-white rounded-2xl shadow p-8 border-4 border-teal-300">
         <h2 className="text-2xl font-extrabold text-teal-800 mb-4 text-center flex items-center justify-center gap-2">
@@ -107,14 +91,11 @@ export default function WomanVysledok() {
           value={email}
           onChange={e => setEmail(e.target.value)}
           required
-          disabled={loading}
-          autoComplete="email"
-          aria-label="Email"
         />
-        {error && <div className="text-red-500 font-semibold">{error}</div>}
+        {error && <div className="text-red-500">{error}</div>}
         <button
           type="submit"
-          className="w-full bg-teal-600 text-white py-3 rounded-lg font-bold hover:bg-teal-700 transition disabled:opacity-50 disabled:cursor-not-allowed"
+          className="w-full bg-teal-600 text-white py-3 rounded-lg font-bold hover:bg-teal-700 transition"
           disabled={loading}
         >
           {loading ? "Odosielam..." : "Získať diétny plán"}
