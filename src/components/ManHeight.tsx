@@ -53,7 +53,7 @@ export default function ManHeight() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-tr from-teal-100 via-white to-teal-200">
       <Navbar />
-      <main className="flex-1 flex flex-col items-center pt-16 sm:pt-32 px-2">
+      <main className="flex-1 flex flex-col items-center pt-14 sm:pt-16 px-2">
         <h1 className="text-2xl sm:text-3xl font-extrabold mb-12 text-gray-900 text-center">
           Zadaj svoju výšku
         </h1>

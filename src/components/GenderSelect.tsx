@@ -43,7 +43,7 @@ export default function GenderSelect() {
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-tr from-teal-100 via-white to-teal-200">
-      <main className="flex-1 w-full flex flex-col items-center px-2">
+      <main className="flex-1 w-full flex flex-col items-center px-2 pt-14 sm:pt-16">
         {/* HERO + výber pohlavia */}
         <section className="w-full max-w-3xl flex flex-col items-center pt-8 sm:pt-14">
           <h1 className="text-3xl sm:text-5xl font-extrabold text-teal-700 mb-3 text-center drop-shadow">
@@ -53,7 +53,6 @@ export default function GenderSelect() {
             <b>Mesačný jedálniček + nákupný zoznam</b> online, prispôsobený presne tvojmu cieľu.
             Už <span className="text-teal-600 font-bold">300+ klientov</span> dosiahlo výsledky bez hladovania a obmedzení!
           </p>
-          
         </section>
 
         {/* Výber pohlavia */}
@@ -149,4 +148,3 @@ export default function GenderSelect() {
     </div>
   );
 }
-

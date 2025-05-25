@@ -42,7 +42,7 @@ export default function ManWeight() {
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-tr from-teal-100 via-white to-teal-200">
       <Navbar />
-      <main className="flex-1 flex flex-col md:flex-row justify-center items-center gap-12 w-full max-w-6xl mx-auto px-4 py-10">
+      <main className="flex-1 flex flex-col md:flex-row justify-center items-center gap-12 w-full max-w-6xl mx-auto px-4 py-10 pt-14 sm:pt-16">
         {/* Motivácia a obrázok vľavo */}
         <section className="flex-1 max-w-xl flex flex-col items-center md:items-start justify-center gap-8">
           <img
