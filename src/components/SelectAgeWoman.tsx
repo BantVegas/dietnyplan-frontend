@@ -125,7 +125,10 @@ export default function SelectAgeWoman() {
               />
               <button
                 className="mt-5 px-8 py-3 rounded-lg bg-teal-600 text-white font-bold text-lg hover:bg-teal-700 transition w-full"
-                onClick={() => navigate("/zena/vaha")}
+                onClick={() => {
+                  localStorage.setItem("age", label);
+                  navigate("/zena/vaha");
+                }}
               >
                 Vybrať
               </button>
@@ -137,3 +140,4 @@ export default function SelectAgeWoman() {
     </div>
   );
 }
+

@@ -20,21 +20,26 @@ export default function WomanAllergies() {
   const navigate = useNavigate();
 
   const handleToggle = (idx: number) => {
-    // Ak vyberieš "Žiadne alergie" alebo "Iné" — rovno pokračuj
     if (allergies[idx].label === "Žiadne alergie" || allergies[idx].label === "Iné") {
-      // Tu môžeš uložiť výber do contextu/state/backendu
+      // Uložíme túto hodnotu priamo do localStorage
+      localStorage.setItem("allergies", allergies[idx].label);
       navigate("/zena/vysledok");
       return;
     }
-
     // Multi-select ostatných alergií
     setSelected((prev) =>
       prev.includes(idx) ? prev.filter((i) => i !== idx) : [...prev, idx]
     );
   };
 
-  // Ak chceš automaticky prejsť po prvej voľbe (nechaj handleToggle spustiť navigate aj pri inom výbere)
-  // Alebo pridaj „Pokračovať“ tlačidlo – dám ti aj tú verziu, ak chceš.
+  // Po kliknutí na „Pokračovať“ uložíme zoznam alergií (ako CSV string)
+  const handleContinue = () => {
+    if (selected.length > 0) {
+      const selectedLabels = selected.map((idx) => allergies[idx].label);
+      localStorage.setItem("allergies", selectedLabels.join(", "));
+    }
+    navigate("/zena/vysledok");
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-tr from-teal-100 via-white to-teal-200">
@@ -63,11 +68,11 @@ export default function WomanAllergies() {
             </button>
           ))}
         </div>
-        {/* Ak má užívateľ označené aspoň jednu alergiu (okrem Žiadne/Iné), môže pokračovať */}
+        {/* Pokračovať, ak má užívateľ označené aspoň jednu alergiu (okrem Žiadne/Iné) */}
         {selected.length > 0 && (
           <button
             className="w-full max-w-xs px-8 py-4 rounded-lg font-bold text-lg transition bg-teal-600 text-white hover:bg-teal-700"
-            onClick={() => navigate("/zena/vysledok")}
+            onClick={handleContinue}
           >
             Pokračovať
           </button>

@@ -47,6 +47,8 @@ export default function ManHeight() {
       setError("Zadaj reálnu výšku v rozmedzí 140 – 210 cm.");
       return;
     }
+    // Ulož do localStorage pre neskoršie použitie
+    localStorage.setItem("height", height);
     navigate("/muz/ciel");
   };
 

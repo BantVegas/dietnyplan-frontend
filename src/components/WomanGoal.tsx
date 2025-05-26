@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navbar from "./Navbar";
 import Footer from "./Footer";
@@ -30,8 +29,8 @@ export default function WomanGoal() {
   const navigate = useNavigate();
 
   const handleSelect = (idx: number) => {
-    // Tu môžeš uložiť do contextu/state:
-    // Napr. dispatch({ type: "SET_GOAL", payload: goals[idx] });
+    // Ulož cieľ do localStorage
+    localStorage.setItem("goal", goals[idx].label);
     navigate("/zena/preferencie");
   };
 

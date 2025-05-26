@@ -29,8 +29,8 @@ export default function ManGoal() {
   const navigate = useNavigate();
 
   const handleSelect = (idx: number) => {
-    // Ulož do contextu/state ak treba:
-    // Napr. dispatch({ type: "SET_GOAL", payload: goals[idx] });
+    // Ulož cieľ do localStorage
+    localStorage.setItem("goal", goals[idx].label);
     navigate("/muz/preferencie");
   };
 

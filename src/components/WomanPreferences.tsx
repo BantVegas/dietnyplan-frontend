@@ -17,7 +17,8 @@ export default function WomanPreferences() {
   const navigate = useNavigate();
 
   const handleSelect = (idx: number) => {
-    // Tu môžeš uložiť preferenciu do contextu/state/backendu
+    // Ulož preferenciu do localStorage
+    localStorage.setItem("preferences", preferences[idx].label);
     navigate("/zena/alergie");
   };
 

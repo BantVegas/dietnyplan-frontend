@@ -116,7 +116,10 @@ export default function SelectAgeMan() {
               <span className="font-bold text-lg text-teal-700">{label}</span>
               <button
                 className="mt-5 px-8 py-3 rounded-lg bg-teal-600 text-white font-bold text-lg hover:bg-teal-700 transition w-full"
-                onClick={() => navigate("/muz/vaha")}
+                onClick={() => {
+                  localStorage.setItem("age", label);
+                  navigate("/muz/vaha");
+                }}
               >
                 Vybrať
               </button>

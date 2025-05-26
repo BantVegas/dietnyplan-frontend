@@ -36,6 +36,8 @@ export default function WomanWeight() {
       setError("Zadaj reálnu váhu v rozmedzí 30 – 200 kg.");
       return;
     }
+    // Uloženie váhy do localStorage
+    localStorage.setItem("weight", weight);
     navigate("/zena/vyska");
   };
 

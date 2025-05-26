@@ -19,11 +19,15 @@ export default function WomanAllergies() {
   const [selected, setSelected] = useState<number[]>([]);
   const navigate = useNavigate();
 
+  const saveAndNavigate = (labels: string[]) => {
+    localStorage.setItem("allergies", labels.join(","));
+    navigate("/zena/vysledok");
+  };
+
   const handleToggle = (idx: number) => {
-    // Ak vyberieš "Žiadne alergie" alebo "Iné" — rovno pokračuj
     if (allergies[idx].label === "Žiadne alergie" || allergies[idx].label === "Iné") {
-      // Tu môžeš uložiť výber do contextu/state/backendu
-      navigate("/zena/vysledok");
+      // Ulož výber (len aktuálna položka) a pokračuj
+      saveAndNavigate([allergies[idx].label]);
       return;
     }
 
@@ -33,8 +37,11 @@ export default function WomanAllergies() {
     );
   };
 
-  // Ak chceš automaticky prejsť po prvej voľbe (nechaj handleToggle spustiť navigate aj pri inom výbere)
-  // Alebo pridaj „Pokračovať“ tlačidlo – dám ti aj tú verziu, ak chceš.
+  // Potvrdenie multi-selectu
+  const handleContinue = () => {
+    const selectedLabels = selected.map((idx) => allergies[idx].label);
+    saveAndNavigate(selectedLabels);
+  };
 
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-tr from-teal-100 via-white to-teal-200">
@@ -54,8 +61,7 @@ export default function WomanAllergies() {
               className={`flex flex-col items-center justify-center h-24 rounded-2xl shadow-md border-2 transition-all
                 ${selected.includes(idx)
                   ? "border-teal-600 bg-teal-50 scale-105"
-                  : "border-transparent bg-white"}
-              `}
+                  : "border-transparent bg-white"}`}
               onClick={() => handleToggle(idx)}
             >
               <span className="text-2xl mb-1">{al.icon}</span>
@@ -67,7 +73,7 @@ export default function WomanAllergies() {
         {selected.length > 0 && (
           <button
             className="w-full max-w-xs px-8 py-4 rounded-lg font-bold text-lg transition bg-teal-600 text-white hover:bg-teal-700"
-            onClick={() => navigate("/zena/vysledok")}
+            onClick={handleContinue}
           >
             Pokračovať
           </button>

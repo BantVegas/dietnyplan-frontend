@@ -48,6 +48,8 @@ export default function WomanHeight() {
       setError("Zadaj reálnu výšku v rozmedzí 130 – 200 cm.");
       return;
     }
+    // Uloženie výšky do localStorage
+    localStorage.setItem("height", height);
     navigate("/zena/ciel");
   };
 

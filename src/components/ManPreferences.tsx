@@ -17,7 +17,8 @@ export default function ManPreferences() {
   const navigate = useNavigate();
 
   const handleSelect = (idx: number) => {
-    // Tu môžeš uložiť preferenciu do contextu/state/backendu
+    // Uloží vybranú preferenciu do localStorage
+    localStorage.setItem("preferences", preferences[idx].label);
     navigate("/muz/alergie");
   };
 

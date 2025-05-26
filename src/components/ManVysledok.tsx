@@ -7,6 +7,16 @@ export default function ManVysledok() {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
+  // Načítanie údajov z localStorage (alebo nastav prázdne/default hodnoty)
+  const name = localStorage.getItem("name") || "";
+  const age = localStorage.getItem("age") || "";
+  const gender = "muz"; // Alebo localStorage.getItem("gender") || ""
+  const weight = localStorage.getItem("weight") || "";
+  const height = localStorage.getItem("height") || "";
+  const goal = localStorage.getItem("goal") || "";
+  const preferences = localStorage.getItem("preferences") || "";
+  const allergies = localStorage.getItem("allergies") || "";
+
   // Statické údaje príklad vzorového plánu pre muža
   const samplePlan = {
     calories: 1800,
@@ -26,11 +36,28 @@ export default function ManVysledok() {
     setError("");
     setLoading(true);
 
+    // Validácia – minimálne povinné polia
+    if (!name || !age || !weight || !height || !goal || !gender || !email) {
+      setError("Vyplňte všetky povinné údaje, aby sme vám mohli vytvoriť plán.");
+      setLoading(false);
+      return;
+    }
+
     try {
       const res = await fetch(`${BACKEND_URL}/create-checkout-session`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email }),
+        body: JSON.stringify({
+          name,
+          age: Number(age),
+          gender,
+          weight: Number(weight),
+          height: Number(height),
+          goal,
+          preferences,
+          allergies,
+          email,
+        }),
       });
       if (!res.ok) throw new Error("Chyba servera");
       const data = await res.json();

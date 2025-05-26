@@ -36,6 +36,8 @@ export default function ManWeight() {
       setError("Zadaj reálnu váhu v rozmedzí 40 – 250 kg.");
       return;
     }
+    // ULOŽ DO localStorage
+    localStorage.setItem("weight", weight);
     navigate("/muz/vyska");
   };
 
@@ -115,3 +117,4 @@ export default function ManWeight() {
     </div>
   );
 }
+

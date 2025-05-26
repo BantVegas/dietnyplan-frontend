@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import Footer from "./Footer";
 
@@ -26,6 +26,9 @@ const recenzie = [
 
 export default function GenderSelect() {
   const navigate = useNavigate();
+  // Skús načítať meno z localStorage pri načítaní stránky
+  const [name, setName] = useState(() => localStorage.getItem("name") || "");
+  const [nameError, setNameError] = useState("");
 
   useEffect(() => {
     document.title = "Diétny plán na mieru | dietnyplan.sk";
@@ -41,10 +44,20 @@ export default function GenderSelect() {
     );
   }, []);
 
+  // Funkcia pre prechod na ďalší krok (s kontrolou mena)
+  const handleNavigate = (path: string) => {
+    if (!name.trim()) {
+      setNameError("Zadajte svoje meno.");
+      return;
+    }
+    localStorage.setItem("name", name.trim());
+    navigate(path);
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-tr from-teal-100 via-white to-teal-200">
       <main className="flex-1 w-full flex flex-col items-center px-2 pt-14 sm:pt-16">
-        {/* HERO + výber pohlavia */}
+        {/* HERO sekcia */}
         <section className="w-full max-w-3xl flex flex-col items-center pt-8 sm:pt-14">
           <h1 className="text-3xl sm:text-5xl font-extrabold text-teal-700 mb-3 text-center drop-shadow">
             Získaj diétny plán na mieru, ktorý ťa naozaj zmení
@@ -55,20 +68,22 @@ export default function GenderSelect() {
           </p>
         </section>
 
-        {/* Výber pohlavia */}
+        {/* Výber pohlavia + MENO */}
         <section id="vyber-pohlavia" className="w-full flex flex-col items-center mb-8">
           <h2 className="text-2xl sm:text-3xl font-extrabold mb-6 text-gray-900 text-center">
             Vyber svoje pohlavie
           </h2>
-          <div className="flex flex-col sm:flex-row gap-8 sm:gap-12 w-full justify-center">
+          <div className="flex flex-col sm:flex-row gap-8 sm:gap-12 w-full justify-center items-center">
+
+            {/* Žena */}
             <div
               className="cursor-pointer rounded-xl bg-white shadow-lg p-4 max-w-xs w-full mx-auto transition-transform hover:scale-105 border-2 border-teal-100"
-              onClick={() => navigate("/zena/vek")}
+              onClick={() => handleNavigate("/zena/vek")}
               tabIndex={0}
               aria-label="Vybrať Žena"
               role="button"
               onKeyPress={e => {
-                if (e.key === "Enter") navigate("/zena/vek");
+                if (e.key === "Enter") handleNavigate("/zena/vek");
               }}
             >
               <img
@@ -81,14 +96,40 @@ export default function GenderSelect() {
                 Žena &gt;
               </p>
             </div>
+
+            {/* Input na meno v strede */}
+            <div className="flex flex-col items-center justify-center">
+              <div className="rounded-xl bg-white shadow-lg border-2 border-teal-200 px-4 py-6 flex flex-col items-center min-w-[230px] max-w-xs">
+                <label htmlFor="meno" className="font-semibold text-teal-700 mb-2">
+                  Vaše meno
+                </label>
+                <input
+                  id="meno"
+                  type="text"
+                  className="w-full p-3 rounded-lg border border-teal-300 text-lg text-center"
+                  placeholder="Zadaj svoje meno"
+                  value={name}
+                  onChange={e => {
+                    setName(e.target.value);
+                    setNameError("");
+                  }}
+                  required
+                />
+                {nameError && (
+                  <div className="text-red-500 text-sm mt-1">{nameError}</div>
+                )}
+              </div>
+            </div>
+
+            {/* Muž */}
             <div
               className="cursor-pointer rounded-xl bg-white shadow-lg p-4 max-w-xs w-full mx-auto transition-transform hover:scale-105 border-2 border-teal-100"
-              onClick={() => navigate("/muz/vek")}
+              onClick={() => handleNavigate("/muz/vek")}
               tabIndex={0}
               aria-label="Vybrať Muž"
               role="button"
               onKeyPress={e => {
-                if (e.key === "Enter") navigate("/muz/vek");
+                if (e.key === "Enter") handleNavigate("/muz/vek");
               }}
             >
               <img
