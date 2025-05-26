@@ -83,6 +83,13 @@ const ageOptions = [
   { label: "51+",   img: "/images/muz51+.png" },
 ];
 
+const ageMapping: Record<string, number> = {
+  "18–26": 22,
+  "27–38": 32,
+  "39–50": 44,
+  "51+": 55,
+};
+
 export default function SelectAgeMan() {
   const navigate = useNavigate();
 
@@ -113,11 +120,11 @@ export default function SelectAgeMan() {
                 className="rounded-xl w-40 h-56 object-cover mb-4 shadow"
                 loading="lazy"
               />
-              <span className="font-bold text-lg text-teal-700">{label}</span>
               <button
                 className="mt-5 px-8 py-3 rounded-lg bg-teal-600 text-white font-bold text-lg hover:bg-teal-700 transition w-full"
                 onClick={() => {
-                  localStorage.setItem("age", label);
+                  const numericAge = ageMapping[label];
+                  localStorage.setItem("age", numericAge.toString());
                   navigate("/muz/vaha");
                 }}
               >
