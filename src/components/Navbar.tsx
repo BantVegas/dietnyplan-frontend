@@ -13,15 +13,16 @@ export default function Navbar() {
           dietnyplan.sk
         </span>
       </div>
+      {/* Desktop menu */}
       <div className="hidden md:flex items-center gap-8">
         <Link to="/" className="text-lg font-medium text-gray-700 hover:text-teal-700 transition-colors">Domov</Link>
         <Link to="/onas" className="text-lg font-medium text-gray-700 hover:text-teal-700 transition-colors">O nás</Link>
         <Link to="/ako-to-funguje" className="text-lg font-medium text-gray-700 hover:text-teal-700 transition-colors">Ako to funguje</Link>
         <Link to="/recepty" className="text-lg font-medium text-gray-700 hover:text-teal-700 transition-colors">Recepty</Link>
-        <Link to="/bmi" className="text-lg font-medium text-gray-700 hover:text-teal-700 transition-colors">
-          BMI Kalkulačka
-        </Link>
+        <Link to="/bmi" className="text-lg font-medium text-gray-700 hover:text-teal-700 transition-colors">BMI Kalkulačka</Link>
+        <Link to="/blog" className="text-lg font-medium text-gray-700 hover:text-teal-700 transition-colors">Blog</Link>
       </div>
+      {/* Mobile hamburger */}
       <button
         className="md:hidden p-2 rounded-lg hover:bg-teal-100 transition"
         aria-label="Otvoriť menu"
@@ -35,15 +36,15 @@ export default function Navbar() {
           )}
         </svg>
       </button>
+      {/* Mobile menu */}
       {menuOpen && (
         <div className="absolute top-full left-0 w-full bg-white/90 backdrop-blur-md border-b border-white/30 md:hidden flex flex-col items-center gap-2 py-4 z-50 shadow-md animate-fade-in">
           <Link to="/" className="text-lg font-medium text-gray-700 hover:text-teal-700 py-1 w-full text-center" onClick={() => setMenuOpen(false)}>Domov</Link>
           <Link to="/onas" className="text-lg font-medium text-gray-700 hover:text-teal-700 py-1 w-full text-center" onClick={() => setMenuOpen(false)}>O nás</Link>
           <Link to="/ako-to-funguje" className="text-lg font-medium text-gray-700 hover:text-teal-700 py-1 w-full text-center" onClick={() => setMenuOpen(false)}>Ako to funguje</Link>
           <Link to="/recepty" className="text-lg font-medium text-gray-700 hover:text-teal-700 py-1 w-full text-center" onClick={() => setMenuOpen(false)}>Recepty</Link>
-          <Link to="/bmi" className="text-lg font-medium text-gray-700 hover:text-teal-700 py-1 w-full text-center" onClick={() => setMenuOpen(false)}>
-            BMI Kalkulačka
-          </Link>
+          <Link to="/bmi" className="text-lg font-medium text-gray-700 hover:text-teal-700 py-1 w-full text-center" onClick={() => setMenuOpen(false)}>BMI Kalkulačka</Link>
+          <Link to="/blog" className="text-lg font-medium text-gray-700 hover:text-teal-700 py-1 w-full text-center" onClick={() => setMenuOpen(false)}>Blog</Link>
         </div>
       )}
     </nav>

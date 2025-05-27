@@ -63,7 +63,7 @@ export default function GenderSelect() {
             Získaj diétny plán na mieru, ktorý ťa naozaj zmení
           </h1>
           <p className="text-lg sm:text-xl text-gray-700 text-center mb-6 max-w-2xl">
-            <b>Mesačný jedálniček + nákupný zoznam</b> online, prispôsobený presne tvojmu cieľu.
+            <b>Týždenný jedálniček + nákupný zoznam</b> online, prispôsobený presne tvojmu cieľu.
             Už <span className="text-teal-600 font-bold">300+ klientov</span> dosiahlo výsledky bez hladovania a obmedzení!
           </p>
         </section>

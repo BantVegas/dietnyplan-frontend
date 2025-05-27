@@ -10,6 +10,7 @@ import Onas from "./components/Onas";
 import AkoToFunguje from "./components/AkoToFunguje";
 import Recepty from "./components/Recepty";
 import BMIKalkulacka from "./components/BMIKalkulacka";
+import Blog from "./components/Blog";
 
 
 
@@ -41,6 +42,7 @@ export default function App() {
       <Routes>
         {/* Hlavná stránka */}
         <Route path="/" element={<GenderSelect />} />
+        <Route path="/blog" element={<Blog />} />
 
         {/* Flow pre ženy */}
         <Route path="/zena/vek" element={<SelectAgeWoman />} />

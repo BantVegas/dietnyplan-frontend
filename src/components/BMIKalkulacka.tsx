@@ -35,6 +35,15 @@ export default function BMIKalkulacka() {
     );
   }, []);
 
+  // AdSense inicializácia pre SPA
+  useEffect(() => {
+    // @ts-ignore
+    if (window.adsbygoogle && process.env.NODE_ENV !== "development") {
+      // @ts-ignore
+      window.adsbygoogle.push({});
+    }
+  }, []);
+
   function getBMICategory(bmi: number, gender: string, age: number) {
     if (bmi < 18.5) return "Podváha";
     if (bmi < 25) return "Normálna hmotnosť";
@@ -84,6 +93,15 @@ export default function BMIKalkulacka() {
           <p className="text-lg text-gray-700 max-w-2xl text-center mb-8">
             Seriózna BMI kalkulačka – rýchlo a diskrétne zistíte, či je vaša hmotnosť v zdravých medziach. Pre presnejšie výsledky pridajte svoj vek a pohlavie.
           </p>
+          {/* Google AdSense reklama */}
+          <div className="my-6 flex justify-center w-full">
+            <ins className="adsbygoogle"
+              style={{ display: "block", width: "100%", height: 90 }}
+              data-ad-client="ca-pub-8005465650143173"
+              data-ad-slot="XXXXXXXXXX"    // <- SEM vložíš svoj slot
+              data-ad-format="auto"
+            ></ins>
+          </div>
           <form
             onSubmit={handleSubmit}
             className="flex flex-col items-center gap-4 w-full max-w-sm bg-white bg-opacity-90 p-8 rounded-xl shadow"
@@ -193,7 +211,7 @@ export default function BMIKalkulacka() {
               </div>
               <div className="text-lg font-bold text-teal-700">{result}</div>
               <div className="mt-4 text-gray-600 text-base max-w-md mx-auto">
-                BMI je orientačný údaj, ktorý neberie do úvahy svalovú hmotu, rozloženie tuku, vek, ani špecifiká žien a mužov. 
+                BMI je orientačný údaj, ktorý neberie do úvahy svalovú hmotu, rozloženie tuku, vek, ani špecifiká žien a mužov.
                 Ak chcete individuálne odporúčanie, odporúčame <a href="/" className="text-teal-700 underline">diétny plán na mieru</a>.
               </div>
             </div>
@@ -201,7 +219,7 @@ export default function BMIKalkulacka() {
           <div className="mt-10 max-w-2xl mx-auto text-gray-600 text-sm text-center leading-relaxed">
             <strong>Prečo chceme vedieť aj vek a pohlavie?</strong>
             <br />
-            V dospelosti sa štandardný BMI hodnotí rovnako pre mužov aj ženy, ale ženy majú prirodzene vyšší podiel telesného tuku. 
+            V dospelosti sa štandardný BMI hodnotí rovnako pre mužov aj ženy, ale ženy majú prirodzene vyšší podiel telesného tuku.
             S vekom sa prirodzene mení aj rozloženie tukov a svalov v tele. Ak ste aktívny športovec alebo starší človek, BMI je len orientačný údaj – najviac vypovedá o rizikách extrémov (podváha, obezita).
           </div>
         </div>
@@ -210,5 +228,4 @@ export default function BMIKalkulacka() {
     </div>
   );
 }
-
 

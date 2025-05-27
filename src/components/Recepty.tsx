@@ -274,6 +274,15 @@ export default function Recepty() {
     }
   }, []);
 
+  // AdSense inicializácia pre SPA
+  useEffect(() => {
+    // @ts-ignore
+    if (window.adsbygoogle && process.env.NODE_ENV !== "development") {
+      // @ts-ignore
+      window.adsbygoogle.push({});
+    }
+  }, []);
+
   return (
     <div
       className="min-h-screen w-full flex flex-col items-center justify-start pt-0 relative overflow-hidden"
@@ -292,6 +301,15 @@ export default function Recepty() {
         <p className="text-lg text-gray-700 text-center mb-10 max-w-2xl">
           Inšpirujte sa našimi najobľúbenejšími receptami na <b>chudnutie</b>, <b>udržanie váhy</b> aj <b>priberanie</b>. Každý recept má suroviny aj podrobný postup – stačí si vybrať.
         </p>
+        {/* Google AdSense reklama */}
+        <div className="my-6 flex justify-center w-full">
+          <ins className="adsbygoogle"
+            style={{ display: "block", width: "100%", height: 90 }}
+            data-ad-client="ca-pub-8005465650143173"
+            data-ad-slot="XXXXXXXXXX"
+            data-ad-format="auto"
+          ></ins>
+        </div>
         <div className="space-y-14 w-full max-w-5xl">
           {/* Recepty na chudnutie */}
           <section>
